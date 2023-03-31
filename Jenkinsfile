@@ -1,7 +1,9 @@
 def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
     agent any
-
+    environment {
+        Docker_tag = getVersion()
+    }
     stages {
         stage('checkout github repositoy') {
             steps {
@@ -53,7 +55,7 @@ pipeline {
         }
         stage('Docker image '){
             steps {
-                 sh 'docker build -t rihabhn/backendappimage .'
+                 sh "docker build -t rihabhn/backendappimage:${Docker_tag} . "
             }
         }
         stage('push to DockerHub'){
@@ -61,7 +63,7 @@ pipeline {
 		        withCredentials([usernamePassword(credentialsId: 'dockerhubdev', passwordVariable: 'PASSWORD', usernameVariable: 'USER')])
 		        {
                     sh 'docker login -u ${USER} -p ${PASSWORD}'
-                    sh 'docker push rihabhn/backendappimage'
+                    sh "docker push rihabhn/backendappimage:${Docker_tag}"
                     
                 }
        }
