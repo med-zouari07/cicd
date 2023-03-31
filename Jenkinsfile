@@ -1,6 +1,7 @@
 def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
     agent any
+
     stages {
         stage('checkout github repositoy') {
             steps {
