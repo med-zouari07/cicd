@@ -38,12 +38,12 @@ pipeline {
         stage('Artifact deploy to Nexus ') {
             steps {
                nexusArtifactUploader artifacts: [[
-                   artifactId: 'ExamThourayaS2',
+                   artifactId: 'SpringBootApp',
                    classifier: '',
-                   file: 'target/ExamThourayaS2-0.0.1.jar',
+                   file: 'target/SpringBootApp-0.0.1.jar',
                    type: 'jar']],
                    credentialsId: 'nexus',
-                   groupId: 'tn.esprit',
+                   groupId: 'tn.enit',
                    nexusUrl: '192.168.1.39:8081',
                    nexusVersion: 'nexus3',
                    protocol: 'http',
