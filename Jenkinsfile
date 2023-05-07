@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     stages {
-        stage('checkout github repositoy--') {
+        stage('checkout github repositoy---') {
             steps {
                 echo 'pulling';
                 git branch:'main',url : 'https://github.com/rihabhan/pfa2devops.git';
