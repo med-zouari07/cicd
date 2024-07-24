@@ -6,7 +6,7 @@ pipeline {
         stage('checkout github repositoy') {
             steps {
                 echo 'pulling';
-                git branch:'main',url : 'https://github.com/rihabhan/pfa2devops.git';
+                git branch:'main',url : 'https://github.com/med-zouari07/cicd.git';
             }
         }
         stage('build Maven ') {
@@ -35,22 +35,7 @@ pipeline {
                
                 
             }
-        stage('Artifact deploy to Nexus ') {
-            steps {
-               nexusArtifactUploader artifacts: [[
-                   artifactId: 'SpringBootApp',
-                   classifier: '',
-                   file: 'target/SpringBootApp-0.0.1.jar',
-                   type: 'jar']],
-                   credentialsId: 'nexus',
-                   groupId: 'tn.enit',
-                   nexusUrl: '192.168.1.39:8081',
-                   nexusVersion: 'nexus3',
-                   protocol: 'http',
-                   repository: 'springapp-release',
-                   version: "${version}"
-            }
-        }
+        
         stage('Docker image '){
             steps {
                  sh 'docker build -t rihabhn/backendappimage .'
