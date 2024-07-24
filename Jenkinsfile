@@ -1,6 +1,9 @@
 def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
     agent any
+    tools {
+        maven "Maven3"
+    }
 
     stages {
         stage('checkout github repositoy') {
